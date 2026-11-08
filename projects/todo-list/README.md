@@ -181,7 +181,7 @@ We created one that uses WebMCP tools and never clicks the page by itself.
 
 In VS Code, run **Chat: New Custom Agent** and give it this content:
 
-```markdown
+````markdown
 ---
 name: WebMCP Agent
 description: "Use web applications through their WebMCP tools."
@@ -229,7 +229,7 @@ To discover tools first, call `getTools()` and return
 - Never edit project files or run terminal commands to perform an action.
 - If WebMCP or a suitable tool is unavailable, stop and explain.
   Do not fall back to UI automation.
-```
+````
 
 These instructions tell the agent: use the WebMCP tools of the page, not
 simulated clicks. The agent runs a little JavaScript in the browser to call
