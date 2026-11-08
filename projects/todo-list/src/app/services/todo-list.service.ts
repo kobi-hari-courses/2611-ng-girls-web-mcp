@@ -1,4 +1,5 @@
-import { effect, Service, signal, inject } from '@angular/core';
+import { effect, Service, signal, inject, declareExperimentalWebMcpTool } from '@angular/core';
+import { isStringArray } from '../utils/schema-validator';
 import { StorageService } from './storage.service';
 import type { TodoItem } from '../models/todo-item.model';
 
@@ -44,6 +45,38 @@ export class TodoListService {
   }
 
   constructor() {
+    declareExperimentalWebMcpTool({
+      name: 'get_all_todos',
+      description: 'Returns all the todos in the list.',
+      annotations: { readOnlyHint: true },
+      execute: () => JSON.stringify(this.items()),
+    }).catch(console.error);
+
+    declareExperimentalWebMcpTool({
+      name: 'add_todos',
+      description: 'Add one or more todos to the list.',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          titles: {
+            type: 'array',
+            items: { type: 'string' },
+            description: 'The titles of the new todos.',
+          },
+        },
+        required: ['titles'],
+        additionalProperties: false,
+      },
+      execute: ({ titles }) => {
+        if (!isStringArray(titles) || titles.length === 0) {
+          throw new Error('A non-empty list of titles is required.');
+        }
+        titles.forEach((title) => this.addItem(title));
+        return `Added ${titles.length} todos`;
+      },
+    }).catch(console.error);
+    
+
     this.#readFromLocalStorage();
     effect(() => {
       this.#writeToLocalStorage();
