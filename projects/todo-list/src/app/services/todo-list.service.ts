@@ -11,7 +11,7 @@ export class TodoListService {
   readonly items = this.#items.asReadonly();
 
   addItem(title: string) {
-    this.#items.update((items) => [...items, { title, completed: false }]);
+    this.#items.update((items) => [...items, { id: crypto.randomUUID(), title, completed: false }]);
   }
 
   toggleItem(index: number) {
@@ -33,9 +33,9 @@ export class TodoListService {
   }
 
   #readFromLocalStorage() {
-    const items = this.#storage.readFromLocalStorage<TodoItem[]>('todoItems');
+    const items = this.#storage.readFromLocalStorage<(Omit<TodoItem, 'id'> & { id?: string })[]>('todoItems');
     if (items) {
-      this.#items.set(items);
+      this.#items.set(items.map((item) => ({ ...item, id: item.id ?? crypto.randomUUID() })));
     }
   }
 

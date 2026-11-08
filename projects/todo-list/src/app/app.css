@@ -19,6 +19,7 @@
     .items {
         display: flex;
         flex-direction: column;
+        interpolate-size: allow-keywords;
 
         app-todo-item {
             border-top: 1px solid var(--divider-color);
@@ -26,4 +27,27 @@
             padding-bottom: 0.5rem;
         }
     }
+
+    .todo-enter {
+        animation: todo-in 300ms ease-out;
+    }
+
+    .todo-leave {
+        animation: todo-out 300ms ease-in;
+        pointer-events: none;
+    }
+
+    .todo-enter,
+    .todo-leave {
+        min-height: 0;
+        overflow: hidden;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .todo-enter,
+        .todo-leave {
+            animation-duration: 1ms;
+        }
+    }
+
 }

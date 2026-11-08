@@ -4,12 +4,13 @@
 />
 
 <div class="items">
-  @for(item of todoList.items(); track $index) {
+  @for(item of todoList.items(); track item.id) {
     <app-todo-item [item]="item"
       (deleted)="todoList.removeItem($index)"
       (toggled)="todoList.toggleItem($index)"
       (renamed)="todoList.renameItem($index, $event)"
+      animate.enter="todo-enter"
+      animate.leave="todo-leave"
     />
   }
 </div>
-
