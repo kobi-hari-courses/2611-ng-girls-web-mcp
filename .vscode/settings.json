@@ -1,0 +1,16 @@
+{
+    "workbench.colorCustomizations": {
+        "activityBar.background": "#630011",
+        "titleBar.activeBackground": "#FFC0CB",
+        "titleBar.activeForeground": "#3C000B",
+        "titleBar.inactiveBackground": "#630011",
+        "titleBar.inactiveForeground": "#3C000B",
+        "statusBar.background": "#770015",
+        "statusBar.foreground": "#FFF9FA",
+        "statusBar.debuggingBackground": "#770015",
+        "statusBar.debuggingForeground": "#FFF9FA",
+        "statusBar.noFolderBackground": "#770015",
+        "statusBar.noFolderForeground": "#FFF9FA"
+    },
+    "windowColors.baseColor": "pink"
+}
