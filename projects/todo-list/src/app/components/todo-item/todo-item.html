@@ -1,1 +1,24 @@
-<p>todo-item works!</p>
+<button class="toggle">
+  @if (item().completed) {
+    ✓
+  }
+</button>
+<div class="caption">
+  @if (editMode()) {
+    <input
+      type="text"
+      value="{{ item().title }}"
+      (blur)="commit($event.target.value)"
+      (keyup.enter)="commit($event.target.value)"
+    />
+  } @else {
+    <button (click)="startEditMode()">
+      {{ item().title }}
+    </button>
+  }
+</div>
+<div class="delete">
+    <button (click)="deleted.emit()">
+        🗑︎      
+    </button>
+</div>

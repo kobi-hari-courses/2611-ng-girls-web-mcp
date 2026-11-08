@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, output } from '@angular/core';
 
 @Component({
   imports: [],
@@ -6,4 +6,6 @@ import { Component } from '@angular/core';
   styleUrl: './input-button-unit.css',
   templateUrl: './input-button-unit.html',
 })
-export class InputButtonUnit {}
+export class InputButtonUnitComponent {
+  readonly added = output<string>();
+}

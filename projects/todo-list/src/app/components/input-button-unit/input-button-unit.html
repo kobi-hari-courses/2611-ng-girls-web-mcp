@@ -1,1 +1,11 @@
-<p>input-button-unit works!</p>
+<input type="text" #inputElement
+    (keydown.enter)="added.emit(inputElement.value); 
+        inputElement.value = ''; 
+        inputElement.focus()"
+ />
+<button 
+    (click)="added.emit(inputElement.value); 
+        inputElement.value = ''; 
+        inputElement.focus()">
+  +
+</button>

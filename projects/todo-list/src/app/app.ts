@@ -1,12 +1,14 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, inject, signal } from '@angular/core';
+import { TodoItemComponent } from './components/todo-item/todo-item';
+import { InputButtonUnitComponent } from './components/input-button-unit/input-button-unit';
+import { TodoListService } from './services/todo-list.service';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [InputButtonUnitComponent, TodoItemComponent],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
 export class App {
-  protected readonly title = signal('todo-list');
+  readonly todoList = inject(TodoListService);
 }

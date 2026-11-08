@@ -5,6 +5,7 @@ import type { TodoItem } from '../models/todo-item.model';
 @Service()
 export class TodoListService {
   readonly #items = signal<TodoItem[]>([]);
+
   readonly #storage = inject(StorageService);
 
   readonly items = this.#items.asReadonly();
@@ -21,6 +22,14 @@ export class TodoListService {
 
   removeItem(index: number) {
     this.#items.update((items) => items.filter((_, i) => i !== index));
+  }
+
+  renameItem(index: number, title: string) {
+    this.#items.update((items) =>
+      items.map((item, i) => (i === index 
+        ? { ...item, title } 
+        : item)),
+    );
   }
 
   #readFromLocalStorage() {
