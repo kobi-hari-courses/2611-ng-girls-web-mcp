@@ -2,8 +2,10 @@
     (keydown.enter)="added.emit(inputElement.value); 
         inputElement.value = ''; 
         inputElement.focus()"
+        placeholder="Add a todo..."
  />
-<button 
+<button icon
+    aria-label="Add todo"
     (click)="added.emit(inputElement.value); 
         inputElement.value = ''; 
         inputElement.focus()">

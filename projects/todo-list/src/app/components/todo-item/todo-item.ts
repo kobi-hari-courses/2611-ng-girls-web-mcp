@@ -23,4 +23,8 @@ export class TodoItemComponent {
     this.editMode.set(false);
     this.renamed.emit(newTitle);
   }
+
+  cancel() {
+    this.editMode.set(false);
+  }
 }

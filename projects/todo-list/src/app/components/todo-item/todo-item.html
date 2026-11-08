@@ -1,4 +1,4 @@
-<button class="toggle">
+<button flat class="toggle" (click)="toggled.emit()">
   @if (item().completed) {
     ✓
   }
@@ -7,18 +7,22 @@
   @if (editMode()) {
     <input
       type="text"
+      #titleInput
       value="{{ item().title }}"
-      (blur)="commit($event.target.value)"
-      (keyup.enter)="commit($event.target.value)"
+      (blur)="commit(titleInput.value)"
+      (keyup.enter)="commit(titleInput.value)"
+      (keyup.esc)="titleInput.value = item().title; cancel()"
     />
   } @else {
-    <button (click)="startEditMode()">
+    <button transparent
+      [class.completed]="item().completed" 
+      (click)="startEditMode()">
       {{ item().title }}
     </button>
   }
 </div>
 <div class="delete">
-    <button (click)="deleted.emit()">
+    <button icon danger (click)="deleted.emit()">
         🗑︎      
     </button>
 </div>
