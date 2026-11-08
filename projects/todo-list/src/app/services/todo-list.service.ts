@@ -49,7 +49,7 @@ export class TodoListService {
       name: 'get_all_todos',
       description: 'Returns all the todos in the list.',
       annotations: { readOnlyHint: true },
-      execute: () => JSON.stringify(this.items()),
+      execute: () => this.items(),
     }).catch(console.error);
 
     declareExperimentalWebMcpTool({
@@ -72,7 +72,7 @@ export class TodoListService {
           throw new Error('A non-empty list of titles is required.');
         }
         titles.forEach((title) => this.addItem(title));
-        return `Added ${titles.length} todos`;
+        return { added: titles.length };
       },
     }).catch(console.error);
     

@@ -54,7 +54,7 @@ declareExperimentalWebMcpTool({
   name: 'get_all_todos',
   description: 'Returns all the todos in the list.',
   annotations: { readOnlyHint: true },
-  execute: () => JSON.stringify(this.items()),
+  execute: () => this.items(),
 }).catch(console.error);
 ```
 
@@ -64,7 +64,8 @@ What each part does:
 - `description` tells the agent, in plain words, what the tool does.
 - `annotations: { readOnlyHint: true }` tells the agent that this tool only reads data.
 - `execute` is the code that runs when the agent calls the tool.
-  It returns the current list as JSON text. This tool needs no input.
+  It returns the current list. The browser turns the result into JSON for
+  the agent, so we can return objects directly. This tool needs no input.
 - `.catch(console.error)` shows an error in the browser console if the tool cannot be created.
 
 ## Step 3: Add a tool that adds todos
@@ -112,7 +113,7 @@ declareExperimentalWebMcpTool({
       throw new Error('A non-empty list of titles is required.');
     }
     titles.forEach((title) => this.addItem(title));
-    return `Added ${titles.length} todos`;
+    return { added: titles.length };
   },
 }).catch(console.error);
 ```
